@@ -53,7 +53,7 @@ app.post('/ajuda', async (req, res) => {
     res.json({ texto, audioUrl: id ? `/audio/${id}.mp3` : null });
   } catch (e) {
     console.error(e);
-    res.status(500).json({ erro: 'Falha ao consultar a IA' });
+    res.status(500).json({ erro: `Falha na IA: ${e.status || ''} ${e.message}` });
   }
 });
 
@@ -72,7 +72,7 @@ app.post('/voz', upload.single('audio'), async (req, res) => {
     res.json({ pergunta: t.text, texto, audioUrl: `/audio/${id}.mp3` });
   } catch (e) {
     console.error(e);
-    res.status(500).json({ erro: 'Falha ao processar o áudio' });
+    res.status(500).json({ erro: `Falha no áudio: ${e.status || ''} ${e.message}` });
   }
 });
 
